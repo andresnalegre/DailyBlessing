@@ -2,21 +2,16 @@
   "name": "daily-blessing",
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://andresnalegre.github.io/DailyBlessing",
   "scripts": {
     "start": "NODE_ENV=production node src/server.js",
     "dev": "NODE_ENV=development nodemon src/server.js",
-    "clean": "pkill -f node && npm start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build"
+    "clean": "pkill -f node && npm start"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2"
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0",
     "nodemon": "^2.0.22"
   }
 }
