@@ -1,6 +1,6 @@
 # Daily Blessing
 
-**Daily Blessing** is a Node.js project where I use Bootstrap and JavaScript. The goal of this project is to create a simple blessing generator with ambient sound in the background to provide a better and more immersive user experience.
+[Daily Blessing](https://daily-blessing-e6e8baa866e7.herokuapp.com) is a Node.js project where I use Bootstrap and JavaScript. The goal of this project is to create a simple blessing generator with ambient sound in the background to provide a better and more immersive user experience.
 
 ---
 
