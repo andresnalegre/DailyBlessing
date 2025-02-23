@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const generateButton = document.getElementById("generate-button");
     const messageDisplay = document.getElementById("message");
     const passageDisplay = document.getElementById("passage");
-    const shareWhatsApp = document.getElementById("share-whatsapp");
     const copyText = document.getElementById("copy-text");
     const toast = document.getElementById("toast");
     const audioElement = document.getElementById('background-music');
@@ -21,12 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             messageDisplay.textContent = "Error loading blessings. Please try again.";
             passageDisplay.textContent = "";
         }
-    };
-
-    const shareOnWhatsApp = () => {
-        const text = `${messageDisplay.textContent} ${passageDisplay.textContent}`;
-        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-        window.open(url);
     };
 
     const generateBlessing = () => {
@@ -58,14 +51,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const copyToClipboard = () => {
         const text = `${messageDisplay.textContent} ${passageDisplay.textContent}`;
-        navigator.clipboard.writeText(text).then(() => {
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
-        });
+        if (navigator.clipboard && window.isSecureContext) {
+            // Usar a API moderna
+            navigator.clipboard.writeText(text).then(() => {
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 10300);
+            }).catch(err => {
+                console.error('Erro ao copiar para a área de transferência:', err);
+            });
+        } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 10300);
+            } catch (err) {
+                console.error('Erro ao copiar para a área de transferência:', err);
+            }
+            document.body.removeChild(textArea);
+        }
     };
 
     generateButton.addEventListener("click", generateBlessing);
-    shareWhatsApp.addEventListener("click", shareOnWhatsApp);
     copyText.addEventListener("click", copyToClipboard);
 
     audioElement.addEventListener('ended', () => {
